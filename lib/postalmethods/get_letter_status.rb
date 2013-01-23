@@ -25,15 +25,14 @@ module PostalMethods
     def get_letter_status_multiple(ids)
       raise PostalMethods::NoPreparationException unless self.prepared
 
-      if ids.class == Array
+      if ids.respond_to?(:join)
         ids = ids.join(",")
       end
-      
       # minimal input checking - let api take care of it
-      return PostalMethods::InvalidLetterIDsRange unless ids.class == String
+      return PostalMethods::InvalidLetterIDsRange unless ids.respond_to? :to_s
 
       ## get status
-      opts = {:APIKey => self.api_key, :ID => id}
+      opts = {:APIKey => self.api_key, :ID => ids.to_s}
       
       rv = @rpc_driver.getBatchStatus(opts)
       ws_status = rv.getBatchStatusResult.resultCode.to_i
