@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{postalmethods}
   s.rubygems_version = %q{1.2.0}
   s.summary = %q{API wrapper library for the postal methods api.}
-
+  s.add_dependency(%q<soap2r>)
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 2
